@@ -82,7 +82,7 @@ class RedditScraper(object):
 			#=====[ Step 1: add meme	]=====
 			try:
 				meme_name, title, top, bottom = self.parse_comment(c.body)
-				meme = (meme_name, title, top, bottom)
+				meme = (meme_name, title, top, bottom, c.id)
 				memes.append(meme)
 				self.num_scraped += 1
 			except:
