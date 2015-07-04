@@ -21,14 +21,16 @@ class ImgurScraper(object):
 	#==========[ Parameters ]==========
 	client_id = '8e6c102fd0cb416'
 	client_secret = 'a2ab9f76a1b6706b00200fa74270a281c32248bb'
-	base_data_dir = './data/imgur'
+	base_data_dir = os.path.join(os.path.split(os.path.abspath(__file__))[0], 'data/imgur/')
 	block_size = 500
-	print_size = 100
+	print_size = 60
 
 	def __init__(self):
 
 		#=====[ Step 1: get data_dir	]=====
 		self.data_dir = os.path.join(self.base_data_dir, str(datetime.datetime.now().date()))
+		if not os.path.exists(self.data_dir):
+			os.mkdir(self.data_dir)
 
 		#=====[ Step 2: get client	]=====
 		self.client = ImgurClient(self.client_id, self.client_secret)
@@ -120,6 +122,7 @@ class ImgurScraper(object):
 
 if __name__ == '__main__':
 	scraper = ImgurScraper()
+	print scraper.data_dir
 	scraper.scrape_memes()
 
 
