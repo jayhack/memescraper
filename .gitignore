@@ -1,0 +1,7 @@
+#====[ standard ]=====
+*.pyc
+
+
+#=====[ data ]=====
+data/imgur/*
+data/reddit/*

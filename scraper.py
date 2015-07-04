@@ -7,6 +7,7 @@ defines the scraper
 import os
 import pickle
 import requests
+import time
 
 class MemeScraper(object):
 	"""
