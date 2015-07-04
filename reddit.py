@@ -7,6 +7,7 @@ Defines scraper for imgurtranscriber
 import os
 import pickle
 import praw
+import datetime
 
 class RedditScraper(object):
 	"""
@@ -15,12 +16,18 @@ class RedditScraper(object):
 
 	Scrapes memes from Reddit, using user imgurtranscriber
 	"""
-	data_dir = './data'
+	base_data_dir = os.path.join(os.path.split(os.path.abspath(__file__))[0], 'data/reddit/')
 	user_agent = 'in_the_fresh'
-	block_size = 1000
+	block_size = 500
 	print_size = 100
 
 	def __init__(self):
+		#=====[ Step 1: get data_dir	]=====
+		self.data_dir = os.path.join(self.base_data_dir, str(datetime.datetime.now().date()))
+		if not os.path.exists(self.data_dir):
+			os.mkdir(self.data_dir)
+
+		#=====[ Step 2: get client	]=====
 		self.client = praw.Reddit(user_agent=self.user_agent)
 		self.num_scraped = 0
 
@@ -85,8 +92,9 @@ class RedditScraper(object):
 				meme = (meme_name, title, top, bottom, c.id)
 				memes.append(meme)
 				self.num_scraped += 1
+				print '.'
 			except:
-				pass
+				'x'
 
 			#=====[ Step 2: dump if appropriate	]=====
 			if (self.num_scraped % self.block_size) == 0:
