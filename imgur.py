@@ -81,6 +81,7 @@ class ImgurScraper(object):
 
 	def scrape_memes(self, page_ix=0):
 		memes = []
+		num_failed = 0
 		self.num_scraped = 60*page_ix
 		while (True):
 			
@@ -89,7 +90,11 @@ class ImgurScraper(object):
 				images = self.get_gallery_page(page_ix)
 			except:
 				print '>>gallery failed; continuing<<'
-				continue
+				num_failed += 1
+				if num_failed >= 10:
+					break
+				else:
+					continue
 
 			#=====[ Step 2: get memes	]=====
 			for image in images:
