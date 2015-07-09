@@ -77,7 +77,8 @@ class ImgurScraper(object):
 
 	def get_gallery_page(self, page, verbose=True):
 		"""returns list of GalleryImages"""
-		return self.client.memes_subgallery(sort='top', page=page, window="day")
+		# return self.client.memes_subgallery(sort='top', page=page, window="day")
+		return self.client.memes_subgallery(sort='time', page=page)		
 
 	def scrape_memes(self, page_ix=0):
 		memes = []
