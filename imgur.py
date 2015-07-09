@@ -123,6 +123,7 @@ class ImgurScraper(object):
 			if self.num_scraped >= 2000:
 				print '\n>>>FINISHED<<<'
 				break
+			self.dump_memes(memes)
 
 
 
